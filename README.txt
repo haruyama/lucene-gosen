@@ -1,3 +1,7 @@
+This is an improved version of lucene-gosen (https://code.google.com/p/lucene-gosen/)
+
+----- original -----
+
 Installation With Apache Solr 3.6:
 
 1. run 'ant'. this will make lucene-gosen-{version}.jar
