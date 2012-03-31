@@ -1,3 +1,5 @@
 build/
 dictionary/ipadic/
 src/compiled-dictionaries/
+bin/
+dictionary/naist-chasen/
