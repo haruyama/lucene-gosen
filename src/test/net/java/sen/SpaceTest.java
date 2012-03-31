@@ -22,6 +22,7 @@ package net.java.sen;
 import static net.java.sen.SenTestUtil.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.java.sen.StringTagger;
@@ -54,7 +55,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -77,7 +78,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -101,7 +102,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -125,7 +126,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -149,7 +150,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -173,7 +174,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
@@ -197,7 +198,7 @@ public class SpaceTest extends LuceneTestCase {
     
     StringTagger tagger = getStringTagger();
     
-    List<Token> tokens = tagger.analyze(testString);
+    List<Token> tokens = tagger.analyze(testString, new ArrayList<Token>());
     
     compareTokens (testTokens, tokens);
   }
