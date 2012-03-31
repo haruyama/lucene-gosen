@@ -29,6 +29,9 @@ import net.java.sen.dictionary.Morpheme;
  * Attribute for {@link Morpheme#getReadings()}.
  */
 public class ReadingsAttributeImpl extends AttributeImpl implements ReadingsAttribute, Cloneable {
+  
+  private static final long serialVersionUID = 1L;
+  
   private Morpheme morpheme;
 
   public List<String> getReadings() {

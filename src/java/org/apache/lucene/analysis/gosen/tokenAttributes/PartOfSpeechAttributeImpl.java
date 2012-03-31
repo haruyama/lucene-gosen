@@ -23,6 +23,9 @@ import org.apache.lucene.util.AttributeImpl;
 import org.apache.lucene.util.AttributeReflector;
 
 public class PartOfSpeechAttributeImpl extends AttributeImpl implements PartOfSpeechAttribute, Cloneable {
+  
+  private static final long serialVersionUID = 1L;
+  
   private Morpheme morpheme;
   
   public String getPartOfSpeech() {
