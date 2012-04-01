@@ -228,7 +228,7 @@ class CostMatrixBuilder {
       dicIndex.put(partOfSpeech, rg + 1);
       return rg;
     } finally {
-      IOUtils.close(parser);
+      IOUtils.closeWhileHandlingException(parser);
     }
   }
   

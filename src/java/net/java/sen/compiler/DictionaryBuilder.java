@@ -389,7 +389,7 @@ public class DictionaryBuilder {
             }
           }
         } finally {
-          IOUtils.close(parser, fileInputStream);
+          IOUtils.closeWhileHandlingException(parser, fileInputStream);
         }
       }
 
@@ -440,10 +440,10 @@ public class DictionaryBuilder {
       unknownCToken.partOfSpeechIndex = -1;
       standardCTokens[2] = unknownCToken;
       } finally {
-        IOUtils.close(index, fos);
+        IOUtils.closeWhileHandlingException(index, fos);
       }
     } finally {
-      IOUtils.close(outputStream, bufferedOutputStream, fileOutputStream);
+      IOUtils.closeWhileHandlingException(outputStream, bufferedOutputStream, fileOutputStream);
     }
   }
 
@@ -561,7 +561,7 @@ public class DictionaryBuilder {
 
       return matrixBuilders;
     } finally {
-      IOUtils.close(parser, fis, indexChannel);
+      IOUtils.closeWhileHandlingException(parser, fis, indexChannel);
     }
   }
 
@@ -629,7 +629,7 @@ public class DictionaryBuilder {
 
       return trieData;
     } finally {
-      IOUtils.close(out, bos, fos);
+      IOUtils.closeWhileHandlingException(out, bos, fos);
     }
 
   }
@@ -665,7 +665,7 @@ public class DictionaryBuilder {
       os.writeInt((int) new File(TOKEN_DATA_FILENAME).length());
       os.writeInt((int) new File(TRIE_DATA_FILENAME).length());
     } finally {
-      IOUtils.close(os, fos);
+      IOUtils.closeWhileHandlingException(os, fos);
     }
   }
 

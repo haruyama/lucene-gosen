@@ -102,7 +102,7 @@ public class CompoundWordTableCompiler {
 
 		     compoundTable.put(buffer.toString(), csv[csv.length - 1]);
 		  } finally {
-		    IOUtils.close(parser);
+		    IOUtils.closeWhileHandlingException(parser);
 		  }
 		}
 
@@ -114,7 +114,7 @@ public class CompoundWordTableCompiler {
 		  os = new ObjectOutputStream(fos);
 		  os.writeObject(compoundTable);
 		} finally {
-		  IOUtils.close(os, fos);
+		  IOUtils.closeWhileHandlingException(os, fos);
 		}
 	}
 
@@ -140,7 +140,7 @@ public class CompoundWordTableCompiler {
       System.exit(1);
 		} finally {
 		  try {
-		    IOUtils.close(reader, inputStreamReader, fileInputStream);
+		    IOUtils.closeWhileHandlingException(reader, inputStreamReader, fileInputStream);
 		  } catch (IOException e) {
 	      e.printStackTrace();
 	      System.exit(1);
