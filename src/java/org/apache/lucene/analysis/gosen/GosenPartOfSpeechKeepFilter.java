@@ -29,6 +29,43 @@ import org.apache.lucene.analysis.gosen.tokenAttributes.PartOfSpeechAttribute;
  * This is the inverse of {@link GosenPartOfSpeechStopFilter}.
  */
 public final class GosenPartOfSpeechKeepFilter extends FilteringTokenFilter {
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + ((keepTags == null) ? 0 : keepTags.hashCode());
+    result = prime * result + ((posAtt == null) ? 0 : posAtt.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GosenPartOfSpeechKeepFilter other = (GosenPartOfSpeechKeepFilter) obj;
+    if (keepTags == null) {
+      if (other.keepTags != null)
+        return false;
+    } else if (!keepTags.equals(other.keepTags))
+      return false;
+    if (posAtt == null) {
+      if (other.posAtt != null)
+        return false;
+    } else if (!posAtt.equals(other.posAtt))
+      return false;
+    return true;
+  }
+
   private final Set<String> keepTags;
   private final PartOfSpeechAttribute posAtt = addAttribute(PartOfSpeechAttribute.class);
 

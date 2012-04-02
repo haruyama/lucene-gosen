@@ -36,6 +36,54 @@ import org.apache.lucene.analysis.tokenattributes.KeywordAttribute;
  */
 public final class GosenReadingsFormFilter extends TokenFilter {
   
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result
+        + ((keywordAtt == null) ? 0 : keywordAtt.hashCode());
+    result = prime * result
+        + ((readingsAtt == null) ? 0 : readingsAtt.hashCode());
+    result = prime * result + (romanized ? 1231 : 1237);
+    result = prime * result + ((termAtt == null) ? 0 : termAtt.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GosenReadingsFormFilter other = (GosenReadingsFormFilter) obj;
+    if (keywordAtt == null) {
+      if (other.keywordAtt != null)
+        return false;
+    } else if (!keywordAtt.equals(other.keywordAtt))
+      return false;
+    if (readingsAtt == null) {
+      if (other.readingsAtt != null)
+        return false;
+    } else if (!readingsAtt.equals(other.readingsAtt))
+      return false;
+    if (romanized != other.romanized)
+      return false;
+    if (termAtt == null) {
+      if (other.termAtt != null)
+        return false;
+    } else if (!termAtt.equals(other.termAtt))
+      return false;
+    return true;
+  }
+
   private boolean romanized;
   private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
   private final ReadingsAttribute readingsAtt = addAttribute(ReadingsAttribute.class);

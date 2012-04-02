@@ -32,7 +32,7 @@ public class ReadingsAttributeImpl extends AttributeImpl implements ReadingsAttr
   
   private static final long serialVersionUID = 1L;
   
-  private Morpheme morpheme;
+  private transient Morpheme morpheme;
 
   public List<String> getReadings() {
     return morpheme == null ? null : morpheme.getReadings();

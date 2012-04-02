@@ -392,4 +392,33 @@ public class Morpheme {
     this.pronunciations = Collections.emptyList();
     this.loaded = LoadState.FULL;
   }
+  
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime
+        * result
+        + ((additionalInformation == null) ? 0 : additionalInformation
+            .hashCode());
+    result = prime * result + ((basicForm == null) ? 0 : basicForm.hashCode());
+    result = prime * result
+        + ((conjugationalForm == null) ? 0 : conjugationalForm.hashCode());
+    result = prime * result
+        + ((conjugationalType == null) ? 0 : conjugationalType.hashCode());
+    result = prime * result
+        + ((dictionary == null) ? 0 : dictionary.hashCode());
+    result = prime * result + ((loaded == null) ? 0 : loaded.hashCode());
+    result = prime * result
+        + ((partOfSpeech == null) ? 0 : partOfSpeech.hashCode());
+    result = prime * result + partOfSpeechIndex;
+    result = prime * result
+        + ((pronunciations == null) ? 0 : pronunciations.hashCode());
+    result = prime * result + ((readings == null) ? 0 : readings.hashCode());
+    return result;
+  }
+
 }

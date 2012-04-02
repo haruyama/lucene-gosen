@@ -52,6 +52,100 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
  * </ul>
  */
 public final class GosenTokenizer extends Tokenizer {
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + accumulatedCost;
+    result = prime * result
+        + ((basicFormAtt == null) ? 0 : basicFormAtt.hashCode());
+    result = prime * result
+        + ((conjugationAtt == null) ? 0 : conjugationAtt.hashCode());
+    result = prime * result + ((costAtt == null) ? 0 : costAtt.hashCode());
+    result = prime * result + ((offsetAtt == null) ? 0 : offsetAtt.hashCode());
+    result = prime * result
+        + ((partOfSpeechAtt == null) ? 0 : partOfSpeechAtt.hashCode());
+    result = prime * result
+        + ((pronunciationsAtt == null) ? 0 : pronunciationsAtt.hashCode());
+    result = prime * result
+        + ((readingsAtt == null) ? 0 : readingsAtt.hashCode());
+    result = prime * result
+        + ((sentenceAtt == null) ? 0 : sentenceAtt.hashCode());
+    result = prime * result + ((tagger == null) ? 0 : tagger.hashCode());
+    result = prime * result + ((termAtt == null) ? 0 : termAtt.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GosenTokenizer other = (GosenTokenizer) obj;
+    if (accumulatedCost != other.accumulatedCost)
+      return false;
+    if (basicFormAtt == null) {
+      if (other.basicFormAtt != null)
+        return false;
+    } else if (!basicFormAtt.equals(other.basicFormAtt))
+      return false;
+    if (conjugationAtt == null) {
+      if (other.conjugationAtt != null)
+        return false;
+    } else if (!conjugationAtt.equals(other.conjugationAtt))
+      return false;
+    if (costAtt == null) {
+      if (other.costAtt != null)
+        return false;
+    } else if (!costAtt.equals(other.costAtt))
+      return false;
+    if (offsetAtt == null) {
+      if (other.offsetAtt != null)
+        return false;
+    } else if (!offsetAtt.equals(other.offsetAtt))
+      return false;
+    if (partOfSpeechAtt == null) {
+      if (other.partOfSpeechAtt != null)
+        return false;
+    } else if (!partOfSpeechAtt.equals(other.partOfSpeechAtt))
+      return false;
+    if (pronunciationsAtt == null) {
+      if (other.pronunciationsAtt != null)
+        return false;
+    } else if (!pronunciationsAtt.equals(other.pronunciationsAtt))
+      return false;
+    if (readingsAtt == null) {
+      if (other.readingsAtt != null)
+        return false;
+    } else if (!readingsAtt.equals(other.readingsAtt))
+      return false;
+    if (sentenceAtt == null) {
+      if (other.sentenceAtt != null)
+        return false;
+    } else if (!sentenceAtt.equals(other.sentenceAtt))
+      return false;
+    if (tagger == null) {
+      if (other.tagger != null)
+        return false;
+    } else if (!tagger.equals(other.tagger))
+      return false;
+    if (termAtt == null) {
+      if (other.termAtt != null)
+        return false;
+    } else if (!termAtt.equals(other.termAtt))
+      return false;
+    return true;
+  }
+
   private final StreamTagger2 tagger;
   private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
   private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);

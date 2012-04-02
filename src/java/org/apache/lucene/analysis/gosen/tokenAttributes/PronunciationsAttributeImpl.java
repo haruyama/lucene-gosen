@@ -29,7 +29,7 @@ public class PronunciationsAttributeImpl extends AttributeImpl implements Pronun
   
   private static final long serialVersionUID = 1L;
   
-  private Morpheme morpheme;
+  private transient Morpheme morpheme;
   
   public List<String> getPronunciations() {
     return morpheme == null ? null : morpheme.getPronunciations();

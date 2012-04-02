@@ -705,9 +705,6 @@ public class DictionaryBuilder {
           BOS_PART_OF_SPEECH, EOS_PART_OF_SPEECH, UNKNOWN_PART_OF_SPEECH,
           dictionaryList, standardCTokens);
 
-      // Free temporary object for GC
-      matrixBuilders = null;
-
       // Create Token file (token.sen)
       TrieData trieData = createTokenFile(TOKEN_DATA_FILENAME, standardCTokens,
           dictionaryList);

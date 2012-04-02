@@ -26,7 +26,7 @@ public class PartOfSpeechAttributeImpl extends AttributeImpl implements PartOfSp
   
   private static final long serialVersionUID = 1L;
   
-  private Morpheme morpheme;
+  private transient Morpheme morpheme;
   
   public String getPartOfSpeech() {
     return morpheme == null ? null : morpheme.getPartOfSpeech();

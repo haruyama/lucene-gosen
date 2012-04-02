@@ -26,6 +26,37 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
  * Removes punctuation tokens
  */
 public final class GosenPunctuationFilter extends FilteringTokenFilter {
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + ((termAtt == null) ? 0 : termAtt.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GosenPunctuationFilter other = (GosenPunctuationFilter) obj;
+    if (termAtt == null) {
+      if (other.termAtt != null)
+        return false;
+    } else if (!termAtt.equals(other.termAtt))
+      return false;
+    return true;
+  }
+
   private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 
   public GosenPunctuationFilter(boolean enablePositionIncrements, TokenStream input) {

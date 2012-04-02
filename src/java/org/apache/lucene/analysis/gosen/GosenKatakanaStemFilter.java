@@ -41,6 +41,44 @@ import org.apache.lucene.analysis.tokenattributes.KeywordAttribute;
  * the {@link KeywordAttribute} before this {@link TokenStream}.
  */
 public final class GosenKatakanaStemFilter extends TokenFilter {
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result
+        + ((keywordAtt == null) ? 0 : keywordAtt.hashCode());
+    result = prime * result + ((termAtt == null) ? 0 : termAtt.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GosenKatakanaStemFilter other = (GosenKatakanaStemFilter) obj;
+    if (keywordAtt == null) {
+      if (other.keywordAtt != null)
+        return false;
+    } else if (!keywordAtt.equals(other.keywordAtt))
+      return false;
+    if (termAtt == null) {
+      if (other.termAtt != null)
+        return false;
+    } else if (!termAtt.equals(other.termAtt))
+      return false;
+    return true;
+  }
+
   static final char COMBINING_KATAKANA_HIRAGANA_VOICED_SOUND_MARK = '\u3099';
   static final char COMBINING_KATAKANA_HIRAGANA_SEMI_VOICED_SOUND_MARK = '\u309A';
   static final char KATAKANA_HIRAGANA_VOICED_SOUND_MARK = '\u309B';

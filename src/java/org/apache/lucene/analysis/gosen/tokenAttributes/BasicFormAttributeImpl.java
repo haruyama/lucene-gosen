@@ -25,7 +25,7 @@ public class BasicFormAttributeImpl extends AttributeImpl implements BasicFormAt
 
   private static final long serialVersionUID = 1L;
   
-  private Morpheme morpheme;
+  private transient Morpheme morpheme;
   
   public String getBasicForm() {
     return morpheme == null ? null : morpheme.getBasicForm();

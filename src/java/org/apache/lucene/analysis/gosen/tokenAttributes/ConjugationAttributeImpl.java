@@ -26,7 +26,7 @@ public class ConjugationAttributeImpl extends AttributeImpl implements Conjugati
   
   private static final long serialVersionUID = 1L;
   
-  private Morpheme morpheme;
+  private transient Morpheme morpheme;
   
   public String getConjugationalForm() {
     return morpheme == null ? null : morpheme.getConjugationalForm();

@@ -112,7 +112,7 @@ public class TrieBuilder {
    * @param newSize The new size of the file
    * @throws IOException 
    */
-  private void resize(int newSize) throws IOException {
+  private void resize(long newSize) throws IOException {
     if (byteBuffer != null) {
       byteBuffer.force();
     }
