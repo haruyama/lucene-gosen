@@ -28,6 +28,8 @@ import java.nio.channels.FileChannel;
 import java.util.BitSet;
 import java.util.Vector;
 
+import org.apache.lucene.util.IOUtils;
+
 /**
  * Constructs a Trie from the supplied sorted key and value arrays
  */
@@ -283,7 +285,9 @@ public class TrieBuilder {
    * @throws IOException 
    */
   public void build(String filename) throws IOException {
-    this.trieFile = new RandomAccessFile(filename, "rw");
+    this.trieFile = null;
+    try {
+      this.trieFile = new RandomAccessFile(filename, "rw");
     this.trieFile.setLength(0);
     
     resize(1024 * 10);
@@ -295,7 +299,9 @@ public class TrieBuilder {
     insert(siblings);
     
     this.byteBuffer.force();
-    this.trieFile.close();
+    } finally {
+      IOUtils.closeWhileHandlingException(this.trieFile);
+    }
   }
   
   /**

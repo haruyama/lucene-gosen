@@ -234,6 +234,7 @@ public class DictionaryBuilder {
     FileOutputStream fileOutputStream = null;
     BufferedOutputStream bufferedOutputStream = null;
     DataOutputStream outputStream = null;
+
     try {
       fileOutputStream = new FileOutputStream(partOfSpeechDataFilename);
       bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
@@ -401,49 +402,49 @@ public class DictionaryBuilder {
         fos = new FileOutputStream(partOfSpeechIndexFilename);
         index = new DataOutputStream(fos);
         index.writeChar(posIndex.size());
-      for (String pos : posIndex) {
-        index.writeUTF(pos);
-      }
+        for (String pos : posIndex) {
+          index.writeUTF(pos);
+        }
 
-      index.writeChar(conjTypeIndex.size());
-      for (String conjType : conjTypeIndex) {
-        index.writeUTF(conjType);
-      }
+        index.writeChar(conjTypeIndex.size());
+        for (String conjType : conjTypeIndex) {
+          index.writeUTF(conjType);
+        }
 
-      index.writeChar(conjFormIndex.size());
-      for (String conjForm : conjFormIndex) {
-        index.writeUTF(conjForm);
-      }
+        index.writeChar(conjFormIndex.size());
+        for (String conjForm : conjFormIndex) {
+          index.writeUTF(conjForm);
+        }
 
+        dictionaryList.sort();
 
-      dictionaryList.sort();
+        CToken bosCToken = new CToken();
+        bosCToken.rcAttr2 = (short) matrixBuilders[0].getDicId(bosPartOfSpeech);
+        bosCToken.rcAttr1 = (short) matrixBuilders[1].getDicId(bosPartOfSpeech);
+        bosCToken.lcAttr = (short) matrixBuilders[2].getDicId(bosPartOfSpeech);
+        standardCTokens[0] = bosCToken;
 
-      CToken bosCToken = new CToken();
-      bosCToken.rcAttr2 = (short) matrixBuilders[0].getDicId(bosPartOfSpeech);
-      bosCToken.rcAttr1 = (short) matrixBuilders[1].getDicId(bosPartOfSpeech);
-      bosCToken.lcAttr = (short) matrixBuilders[2].getDicId(bosPartOfSpeech);
-      standardCTokens[0] = bosCToken;
+        CToken eosCToken = new CToken();
+        eosCToken.rcAttr2 = (short) matrixBuilders[0].getDicId(eosPartOfSpeech);
+        eosCToken.rcAttr1 = (short) matrixBuilders[1].getDicId(eosPartOfSpeech);
+        eosCToken.lcAttr = (short) matrixBuilders[2].getDicId(eosPartOfSpeech);
+        standardCTokens[1] = eosCToken;
 
-      CToken eosCToken = new CToken();
-      eosCToken.rcAttr2 = (short) matrixBuilders[0].getDicId(eosPartOfSpeech);
-      eosCToken.rcAttr1 = (short) matrixBuilders[1].getDicId(eosPartOfSpeech);
-      eosCToken.lcAttr = (short) matrixBuilders[2].getDicId(eosPartOfSpeech);
-      standardCTokens[1] = eosCToken;
-
-      CToken unknownCToken = new CToken();
-      unknownCToken.rcAttr2 = (short) matrixBuilders[0]
-          .getDicId(unknownPartOfSpeech);
-      unknownCToken.rcAttr1 = (short) matrixBuilders[1]
-          .getDicId(unknownPartOfSpeech);
-      unknownCToken.lcAttr = (short) matrixBuilders[2]
-          .getDicId(unknownPartOfSpeech);
-      unknownCToken.partOfSpeechIndex = -1;
-      standardCTokens[2] = unknownCToken;
+        CToken unknownCToken = new CToken();
+        unknownCToken.rcAttr2 = (short) matrixBuilders[0]
+            .getDicId(unknownPartOfSpeech);
+        unknownCToken.rcAttr1 = (short) matrixBuilders[1]
+            .getDicId(unknownPartOfSpeech);
+        unknownCToken.lcAttr = (short) matrixBuilders[2]
+            .getDicId(unknownPartOfSpeech);
+        unknownCToken.partOfSpeechIndex = -1;
+        standardCTokens[2] = unknownCToken;
       } finally {
         IOUtils.closeWhileHandlingException(index, fos);
       }
     } finally {
-      IOUtils.closeWhileHandlingException(outputStream, bufferedOutputStream, fileOutputStream);
+      IOUtils.closeWhileHandlingException(outputStream, bufferedOutputStream,
+          fileOutputStream);
     }
   }
 
@@ -481,6 +482,8 @@ public class DictionaryBuilder {
     FileInputStream fis = null;
     CSVParser parser = null;
     FileChannel indexChannel = null;
+    RandomAccessFile file = null;
+
     try {
       fis = new FileInputStream(connectionCSVFilename);
       parser = new CSVParser(fis, charset);
@@ -523,8 +526,7 @@ public class DictionaryBuilder {
       int matrixSizeBytes = (size1 * size2 * size3 * 2);
       int headerSizeBytes = (3 * 2);
 
-      RandomAccessFile file = new RandomAccessFile(connectionCostDataFilename,
-          "rw");
+      file = new RandomAccessFile(connectionCostDataFilename, "rw");
       file.setLength(0);
       file.writeShort(size1);
       file.writeShort(size2);
@@ -561,7 +563,7 @@ public class DictionaryBuilder {
 
       return matrixBuilders;
     } finally {
-      IOUtils.closeWhileHandlingException(parser, fis, indexChannel);
+      IOUtils.closeWhileHandlingException(parser, fis, indexChannel, file);
     }
   }
 
@@ -691,27 +693,30 @@ public class DictionaryBuilder {
         DEFAULT_CONNECTION_COST, charset);
 
     // Create part-of-speech data file (posInfo.sen)
-    VirtualTupleList dictionaryList = new VirtualTupleList();
-    CToken[] standardCTokens = new CToken[3];
+    VirtualTupleList dictionaryList = null;
 
-    createPartOfSpeechDataFile(dictionaryCSVFilenames,
-        PART_OF_SPEECH_DATA_FILENAME, PART_OF_SPEECH_INDEX_FILENAME,
-        matrixBuilders, PART_OF_SPEECH_START, PART_OF_SPEECH_SIZE, charset,
-        BOS_PART_OF_SPEECH, EOS_PART_OF_SPEECH, UNKNOWN_PART_OF_SPEECH,
-        dictionaryList, standardCTokens);
+    try {
+      dictionaryList = new VirtualTupleList();
+      CToken[] standardCTokens = new CToken[3];
 
-    // Free temporary object for GC
-    matrixBuilders = null;
+      createPartOfSpeechDataFile(dictionaryCSVFilenames,
+          PART_OF_SPEECH_DATA_FILENAME, PART_OF_SPEECH_INDEX_FILENAME,
+          matrixBuilders, PART_OF_SPEECH_START, PART_OF_SPEECH_SIZE, charset,
+          BOS_PART_OF_SPEECH, EOS_PART_OF_SPEECH, UNKNOWN_PART_OF_SPEECH,
+          dictionaryList, standardCTokens);
 
-    // Create Token file (token.sen)
-    TrieData trieData = createTokenFile(TOKEN_DATA_FILENAME, standardCTokens,
-        dictionaryList);
+      // Free temporary object for GC
+      matrixBuilders = null;
 
-    // Free temporary object for GC
-    dictionaryList = null;
+      // Create Token file (token.sen)
+      TrieData trieData = createTokenFile(TOKEN_DATA_FILENAME, standardCTokens,
+          dictionaryList);
 
-    // Create Trie file (da.sen)
-    createTrieFile(TRIE_DATA_FILENAME, trieData);
-    createHeaderFile(HEADER_DATA_FILENAME);
+      // Create Trie file (da.sen)
+      createTrieFile(TRIE_DATA_FILENAME, trieData);
+      createHeaderFile(HEADER_DATA_FILENAME);
+    } finally {
+      IOUtils.closeWhileHandlingException(dictionaryList);
+    }
   }
 }
