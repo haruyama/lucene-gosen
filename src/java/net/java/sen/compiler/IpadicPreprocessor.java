@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.lucene.util.IOUtils;
+import net.java.sen.util.IOUtils;
 
 /**
  * Preprocesses an unpacked Ipadic dictionary into the CSV form used for

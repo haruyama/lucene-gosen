@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-import org.apache.lucene.util.IOUtils;
+import net.java.sen.util.IOUtils;
 
 import net.java.sen.util.CSVParser;
 

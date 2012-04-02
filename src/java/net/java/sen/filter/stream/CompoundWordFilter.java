@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.apache.lucene.util.IOUtils;
+import net.java.sen.util.IOUtils;
 
 import net.java.sen.dictionary.Morpheme;
 import net.java.sen.dictionary.Sentence;

@@ -29,7 +29,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.lucene.util.IOUtils;
+import net.java.sen.util.IOUtils;
 
 import net.java.sen.dictionary.Dictionary;
 import net.java.sen.dictionary.Tokenizer;

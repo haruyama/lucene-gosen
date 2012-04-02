@@ -28,7 +28,7 @@ import java.nio.channels.FileChannel;
 import java.util.BitSet;
 import java.util.Vector;
 
-import org.apache.lucene.util.IOUtils;
+import net.java.sen.util.IOUtils;
 
 /**
  * Constructs a Trie from the supplied sorted key and value arrays
