@@ -94,7 +94,7 @@ public class IpadicPreprocessor {
     BufferedWriter writer = null;
 
     try {
-      fis = new FileInputStream(this.inputDirectory + File.pathSeparator
+      fis = new FileInputStream(this.inputDirectory + File.separator
           + "connect.cha");
       isr = new InputStreamReader(fis, this.charset);
       reader = new BufferedReader(isr);
@@ -163,7 +163,7 @@ public class IpadicPreprocessor {
     BufferedReader reader = null;
 
     try {
-      fis = new FileInputStream(this.inputDirectory + File.pathSeparator
+      fis = new FileInputStream(this.inputDirectory + File.separator
           + "cforms.cha");
       isr = new InputStreamReader(fis, this.charset);
       reader = new BufferedReader(isr);
